@@ -5,6 +5,8 @@ public class AudioVisualizer : MonoBehaviour
     private AudioSource source;
     public float size = 5;
     public float power = 3;
+    private float finalSize;
+    public int shrinkSpeed = 3;
 
     private void Start()
     {
@@ -25,7 +27,17 @@ public class AudioVisualizer : MonoBehaviour
         print(average);
 
         var musicPower = (1 + Mathf.Pow(average, power) * size);
-        transform.localScale = Vector3.one * musicPower;
+
+        if (musicPower > finalSize)
+        {
+            finalSize = musicPower;
+        }
+        else
+        {
+            finalSize -= shrinkSpeed * Time.deltaTime;
+        }
+
+        transform.localScale = Vector3.one * finalSize;
 
         transform.Rotate(musicPower, musicPower, musicPower);
     }
