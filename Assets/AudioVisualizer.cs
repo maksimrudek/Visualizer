@@ -24,9 +24,9 @@ public class AudioVisualizer : MonoBehaviour
         float average = sum / 735;
         print(average);
 
+        var musicPower = (1 + Mathf.Pow(average, power) * size);
+        transform.localScale = Vector3.one * musicPower;
 
-        transform.localScale = Vector3.one * (1 + Mathf.Pow(average, power) * size);
-
-        transform.Rotate(0,average,0);
+        transform.Rotate(musicPower, musicPower, musicPower);
     }
 }
