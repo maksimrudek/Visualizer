@@ -1,12 +1,10 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AudioVisualizer : MonoBehaviour
 {
     private AudioSource source;
-    public float size = 5;
-    public float power = 3;
-    private float finalSize;
-    public int shrinkSpeed = 3;
+    public float average;
 
     private void Start()
     {
@@ -23,22 +21,8 @@ public class AudioVisualizer : MonoBehaviour
         {
             sum += Mathf.Abs(sample);
         }
-        float average = sum / 735;
-        print(average);
+        average = sum / 735;
 
-        var musicPower = (1 + Mathf.Pow(average, power) * size);
-
-        if (musicPower > finalSize)
-        {
-            finalSize = musicPower;
-        }
-        else
-        {
-            finalSize -= shrinkSpeed * Time.deltaTime;
-        }
-
-        transform.localScale = Vector3.one * finalSize;
-
-        transform.Rotate(musicPower, musicPower, musicPower);
+        
     }
 }
